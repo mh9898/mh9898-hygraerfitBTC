@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useTransition} from 'react';
 import {
   View,
   StyleSheet,
@@ -13,6 +13,7 @@ import InputField from '../components/InputField';
 import SocialLoginButtons from '../components/SocialLoginButtons';
 import useColors from '../hooks/useColors';
 import HYcolors from '../utils/HYcolors';
+import {useTranslation} from 'react-i18next';
 
 interface LoginScreenProps {}
 
@@ -21,11 +22,15 @@ const LoginScreen: React.FC<LoginScreenProps> = () => {
 
   const {HYcolors, applyColors} = useColors();
 
+  const {t} = useTranslation();
+
   return (
     <View style={[styles.container, {direction}]}>
       <Header />
       <View style={[styles.content]}>
+        <Text style={styles.welcomeText}>{t('hello')}</Text>
         <Text style={styles.welcomeText}>Welcome back!</Text>
+
         <Text style={styles.subText}>It's great to see you again</Text>
 
         <InputField
@@ -69,12 +74,14 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: HYcolors.light.white, //'#FFF',
     alignItems: 'center',
+    // flexDirection: 'row',
   },
   content: {
     width: '100%',
     maxWidth: 480,
     paddingHorizontal: 19,
     paddingBottom: 30,
+    direction: 'rtl',
   },
   welcomeText: {
     color: '#262121',
